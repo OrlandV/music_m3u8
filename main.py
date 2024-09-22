@@ -1,8 +1,17 @@
-from tkinter import filedialog, messagebox
-from tkinter import *
 from os import path, listdir
+import sys
+from tkinter import *
+from tkinter import filedialog, messagebox
 import re
 from natsort import natsorted
+
+
+def resource_path(relative):
+    if getattr(sys, 'frozen', False):
+        bundle_dir = sys._MEIPASS
+    else:
+        bundle_dir = path.abspath('.')
+    return path.join(bundle_dir, relative)
 
 
 class But(Button):
@@ -57,7 +66,7 @@ class Chb(Checkbutton):
 class App(Tk):
     def __init__(self):
         super().__init__()
-        self.iconbitmap('Orland.ico')
+        self.iconbitmap(resource_path('Orland.ico'))
         self.title('Music.m3u8')
         self.geometry('1000x365')
         self.resizable(False, False)
